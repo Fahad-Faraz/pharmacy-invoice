@@ -4,7 +4,7 @@ import ProtectedRoute from "./ProtectedRoutes.jsx";
 import AdminLayout from "../layouts/AdminLayout.jsx";
 import CashierLayout from "../layouts/CashierLayout.jsx";
 
-import Login from "../features/auth/Login.jsx";
+import Login from "../features/auth/login.jsx";
 import Dashboard from "../features/analytics/Dashboard.jsx";
 import POS from "../features/invoice/POS.jsx";
 import SalesReturn from "../features/invoice/SalesReturn.jsx";
