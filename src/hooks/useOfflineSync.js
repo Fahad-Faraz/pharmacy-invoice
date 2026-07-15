@@ -1,4 +1,3 @@
-// hooks/useOfflineSync.js
 import { useEffect } from "react";
 import API from "../api/axios";
 
@@ -6,12 +5,23 @@ export default function useOfflineSync() {
   useEffect(() => {
     const sync = async () => {
       const data = JSON.parse(localStorage.getItem("offline")) || [];
+      if (data.length === 0) return;
+
+      const remaining = [];
 
       for (let d of data) {
-        await API.post("/invoices", d);
+        try {
+          await API.post("/invoices", d);
+        } catch {
+          remaining.push(d);
+        }
       }
 
-      localStorage.removeItem("offline");
+      if (remaining.length === 0) {
+        localStorage.removeItem("offline");
+      } else {
+        localStorage.setItem("offline", JSON.stringify(remaining));
+      }
     };
 
     window.addEventListener("online", sync);

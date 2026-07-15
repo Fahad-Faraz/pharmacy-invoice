@@ -8,28 +8,19 @@ try {
   if (u) user = JSON.parse(u);
 } catch {}
 
-const initialState = {
-  user,
-  token,
-};
-
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: { user, token },
   reducers: {
     setAuth: (state, action) => {
-      console.log(action.payload.token);
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
-      
       state.user = action.payload.user;
       state.token = action.payload.token;
-
     },
     logout: (state) => {
       state.user = null;
       state.token = null;
-
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
